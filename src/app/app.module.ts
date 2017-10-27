@@ -8,11 +8,13 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDataService } from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { PatientsComponent } from './patients/patients.component';
+import { ExpertsComponent } from './experts/experts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatientsComponent
+    PatientsComponent,
+    ExpertsComponent
   ],
   imports: [
     BrowserModule,
