@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/pluck';
 
 @Component({
   selector: 'app-patients',
@@ -35,6 +34,10 @@ export class PatientsComponent implements OnInit {
     this.http.get('/api/patients').subscribe(data => {
       this.patients = data.json();
     });
+  }
+
+  finish() {
+    this.model = null;
   }
 
 }
