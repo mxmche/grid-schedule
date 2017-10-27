@@ -20,8 +20,14 @@ export class PatientsComponent implements OnInit {
     text$
       .debounceTime(200)
       .distinctUntilChanged()
-      .map(term => term.length < 3 ? []
-        : this.patients.data.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+      .map(term => term.length < 4 ? []
+        : this.patients.data.filter(v => {
+          return /^\d/.test(term) ?
+            v.policy.indexOf(term.toLowerCase()) > -1 :
+            v.name.toLowerCase().indexOf(term.toLowerCase()) > -1;
+        }).slice(0, 10))
+
+  formatter = (x: {name: string, policy: number}) => `${x.policy}, ${x.name}`;
 
   constructor(private http: Http) {}
 

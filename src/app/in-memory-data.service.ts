@@ -2,14 +2,13 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemDataService implements InMemoryDbService {
   createDb() {
-    const patients = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-      'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-      'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-      'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-      'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-      'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-      'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    const patients = [
+      { id: 1, name: 'Иванов Иван Иванович', birthDate: '11.11.2011', policy: '1111111111111111' },
+      { id: 2, name: 'Алексеев Алексей Алексеевич', birthDate: '22.12.1922', policy: '2222222222222222' },
+      { id: 3, name: 'Петров Петр Петрович', birthDate: '01.01.1990', policy: '3333333333333333' },
+      { id: 4, name: 'Сергеев Сергей Сергеевич', birthDate: '02.02.2002', policy: '4444444444444444' },
+      { id: 5, name: 'Васильев Василий Васильевич', birthDate: '09.09.1949', policy: '5555555555555555' }
+    ];
 
     return { patients };
   }
