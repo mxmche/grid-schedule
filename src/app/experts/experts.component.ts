@@ -15,13 +15,16 @@ export class ExpertsComponent implements OnInit {
 
   public model: any;
   public experts: any;
+  public expertsTotal: any;
+  public group: any = true;
+  public groupBySpec: any;
 
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
       .map(term => term.length < 4 ? []
-        : this.experts.data.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        : this.experts.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
 
   formatter = (x: {name: string}) => x.name;
 
@@ -29,7 +32,33 @@ export class ExpertsComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('/api/experts').subscribe(data => {
-      this.experts = data.json();
+      this.experts = data.json().data;
+      this.expertsTotal = data.json().data.length;
+
+      const groupBy = {};
+
+      this.experts.forEach(expert => {
+        const key = expert.specialty;
+
+        if (!groupBy.hasOwnProperty(key)) {
+          groupBy[key] = [expert];
+        } else {
+          groupBy[key].push(expert);
+        }
+      });
+
+      const list = [];
+
+      for (const spec in groupBy) {
+        if (groupBy.hasOwnProperty(spec)) {
+          list.push({
+            name: spec,
+            items: groupBy[spec]
+          });
+        }
+      }
+
+      this.groupBySpec = list;
     });
   }
 

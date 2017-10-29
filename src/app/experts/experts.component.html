@@ -1,13 +1,66 @@
 <div class="form-group">
-  <label for="patients">Специалисты:</label>
-  <input
-    id="patients"
-    type="text"
-    class="form-control"
-    [(ngModel)]="model"
-    [ngbTypeahead]="search"
-    [inputFormatter]="formatter"
-    [resultFormatter]="formatter"
-    placeholder="Введите текст для поиска"
-  />
+  <div class="row">
+    <div class="col">
+      <label for="patients">Специалисты (0/{{ expertsTotal }})</label>
+      <input
+        id="patients"
+        type="text"
+        class="form-control"
+        [(ngModel)]="model"
+        [ngbTypeahead]="search"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        placeholder="Введите текст для поиска"
+      />
+
+      <div class="btn-group" ngbRadioGroup name="radioBasic" [(ngModel)]="group">
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="true"> По специальностям
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" [value]="false"> По алфавиту
+        </label>
+      </div>
+
+      <table class="table" *ngIf="!group">
+        <tbody>
+          <tr *ngFor="let expert of experts">
+            <td><input type="checkbox"></td>
+            <td>{{expert.name}} ({{expert.specialty}})</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table" *ngIf="group" style="width:200px">
+        <tbody>
+          <tr *ngFor="let spec of groupBySpec">
+            <td><input type="checkbox"></td>
+            <td>{{spec.name}}
+              <table class="table table-sm" style="width:200px">
+                <tr *ngFor="let expert of spec.items">
+                  <td><input type="checkbox"></td>
+                  <td>{{expert.name}} ({{expert.place}})</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button
+          class="btn btn-success"
+          id="dropdown"
+          ngbDropdownToggle>
+          Toggle
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdown">
+          <button class="dropdown-item">Выбрать все</button>
+          <button class="dropdown-item">Отменить все выбранные</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

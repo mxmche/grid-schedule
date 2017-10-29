@@ -27,6 +27,6 @@
 
 <div class="searchResult" *ngIf="model && model.name">
   <div>{{ model.name }}</div>
-  <div>{{ model.birthDate }} г.р.</div>
+  <div>{{ model.birthDate | amDateFormat:'DD.MM.YYYY' }} г.р.</div>
   <div>Полис ОМС: {{ model.policy }}</div>
 </div>
