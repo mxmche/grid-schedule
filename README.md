@@ -4,8 +4,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Requirements
 
-Node 6.11.5
-npm 5.5.1
+```bash
+λ node -v
+v6.11.5
+
+λ npm -v
+5.5.1
+```
 
 ## Development server
 
