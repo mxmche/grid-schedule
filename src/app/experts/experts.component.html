@@ -1,7 +1,7 @@
 <div class="form-group">
   <div class="row">
     <div class="col">
-      <label for="patients">Специалисты (0/{{ expertsTotal }})</label>
+      <label for="patients">Специалисты ({{ expertsSelected() }}/{{ expertsTotal }})</label>
       <input
         id="patients"
         type="text"
@@ -25,7 +25,7 @@
       <table class="table" *ngIf="!group">
         <tbody>
           <tr *ngFor="let expert of experts">
-            <td><input type="checkbox" [checked]="expert.selected"></td>
+            <td><input type="checkbox" [checked]="expert.selected" (click)="onToggleCheckbox(expert)"></td>
             <td>{{expert.name}} ({{expert.specialty}})</td>
           </tr>
         </tbody>
@@ -34,11 +34,11 @@
       <table class="table" *ngIf="group" style="width:200px">
         <tbody>
           <tr *ngFor="let spec of groupBySpec">
-            <td><input type="checkbox" [checked]="spec.selected"></td>
+            <td><input type="checkbox" [checked]="spec.selected" (click)="onToggleGroupCheckbox(spec)"></td>
             <td>{{spec.name}}
               <table class="table table-sm" style="width:200px">
                 <tr *ngFor="let expert of spec.items">
-                  <td><input type="checkbox" [checked]="expert.selected"></td>
+                  <td><input type="checkbox" [checked]="expert.selected" (click)="onToggleCheckbox(expert, spec)"></td>
                   <td>{{expert.name}} ({{expert.place}})</td>
                 </tr>
               </table>

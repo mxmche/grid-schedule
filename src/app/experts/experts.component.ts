@@ -19,6 +19,43 @@ export class ExpertsComponent implements OnInit {
   public group: any = true;
   public groupBySpec: any;
 
+  expertsSelected = () => {
+    let count = 0;
+
+    if (this.experts) {
+      this.experts.forEach(expert => {
+        if (expert.selected) {
+          count++;
+        }
+      });
+    }
+
+    return count;
+  }
+
+  onToggleCheckbox(expert, group) {
+
+    expert.selected = !expert.selected;
+
+    if (group) {
+      let count = 0;
+
+      group.items.forEach(e => {
+        if (e.selected) {
+          count++;
+        }
+      });
+
+      group.selected = group.items.length === count;
+    }
+  }
+
+  onToggleGroupCheckbox(group) {
+    group.items.forEach(expert => {
+      expert.selected = !expert.selected;
+    });
+  }
+
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
@@ -66,8 +103,8 @@ export class ExpertsComponent implements OnInit {
     if (this.group) {
       this.groupBySpec.forEach(spec => {
         spec.selected = isSelected;
-        spec.items.forEach(e => {
-          e.selected = isSelected;
+        spec.items.forEach(expert => {
+          expert.selected = isSelected;
         });
       });
     } else {
