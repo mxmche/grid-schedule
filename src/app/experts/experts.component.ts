@@ -62,4 +62,19 @@ export class ExpertsComponent implements OnInit {
     });
   }
 
+  toggleAll(isSelected: boolean) {
+    if (this.group) {
+      this.groupBySpec.forEach(spec => {
+        spec.selected = isSelected;
+        spec.items.forEach(e => {
+          e.selected = isSelected;
+        });
+      });
+    } else {
+      this.experts.forEach(expert => {
+        expert.selected = isSelected;
+      });
+    }
+  }
+
 }

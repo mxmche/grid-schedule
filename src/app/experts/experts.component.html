@@ -25,7 +25,7 @@
       <table class="table" *ngIf="!group">
         <tbody>
           <tr *ngFor="let expert of experts">
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" [checked]="expert.selected"></td>
             <td>{{expert.name}} ({{expert.specialty}})</td>
           </tr>
         </tbody>
@@ -34,11 +34,11 @@
       <table class="table" *ngIf="group" style="width:200px">
         <tbody>
           <tr *ngFor="let spec of groupBySpec">
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" [checked]="spec.selected"></td>
             <td>{{spec.name}}
               <table class="table table-sm" style="width:200px">
                 <tr *ngFor="let expert of spec.items">
-                  <td><input type="checkbox"></td>
+                  <td><input type="checkbox" [checked]="expert.selected"></td>
                   <td>{{expert.name}} ({{expert.place}})</td>
                 </tr>
               </table>
@@ -57,8 +57,8 @@
           Toggle
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdown">
-          <button class="dropdown-item">Выбрать все</button>
-          <button class="dropdown-item">Отменить все выбранные</button>
+          <button class="dropdown-item" (click)="$event.stopPropagation(); toggleAll(true)">Выбрать все</button>
+          <button class="dropdown-item" (click)="$event.stopPropagation(); toggleAll(false)">Отменить все выбранные</button>
         </div>
       </div>
     </div>
